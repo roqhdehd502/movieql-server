@@ -1,0 +1,20 @@
+scalar Email
+scalar PhoneNumber
+
+type User {
+  id: ID!
+  username: String!
+  firstName: String!
+  lastName: String
+  fullName: String!
+  email: Email
+  phoneNumber: PhoneNumber
+}
+
+type Query {
+  allUsers: [User!]!
+}
+
+type Mutation {
+  # Add user-related mutations here if needed
+}

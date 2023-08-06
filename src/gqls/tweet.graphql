@@ -1,0 +1,22 @@
+enum Status {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+type Tweet {
+  id: ID!
+  text: String!
+  author: User
+  status: Status!
+}
+
+type Query {
+  allTweets: [Tweet!]!
+  tweet(id: ID!): Tweet
+}
+
+type Mutation {
+  postTweet(text: String!, userId: ID!): Tweet!
+  deleteTweet(id: ID!): Boolean!
+}

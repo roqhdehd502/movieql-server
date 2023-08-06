@@ -1,0 +1,17 @@
+# Node.js
+node_modules/
+dist/
+
+# macOS
+.DS_Store
+
+# Editor-specific
+.vscode/
+.idea/
+
+# Environment
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
