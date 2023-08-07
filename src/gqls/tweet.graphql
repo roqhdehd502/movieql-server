@@ -1,4 +1,4 @@
-enum Status {
+enum StatusEnum {
   ACTIVE
   INACTIVE
   SUSPENDED
@@ -7,17 +7,19 @@ enum Status {
 input SearchInput {
   keyword: String
 }
-
-input TweetInput {
+input TweetPostInput {
   text: String!
-  userId: ID!
+}
+input TweetUpdateInput {
+  id: ID!
+  text: String
 }
 
 type Tweet {
   id: ID!
   text: String!
   author: User
-  status: Status!
+  status: StatusEnum!
 }
 
 type Query {
@@ -27,6 +29,7 @@ type Query {
 }
 
 type Mutation {
-  postTweet(textInput: TweetInput!): Tweet!
+  postTweet(tweetPostInput: TweetPostInput!): Boolean!
+  updateTweet(tweetUpdateInput: TweetUpdateInput!): Boolean!
   deleteTweet(id: ID!): Boolean!
 }

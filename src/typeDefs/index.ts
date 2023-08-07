@@ -1,10 +1,10 @@
 import { gql } from 'apollo-server-express';
 
 const typeDefs = gql`
-  scalar Email
-  scalar PhoneNumber
+  scalar EmailScalar
+  scalar PhoneNumberScalar
 
-  enum Status {
+  enum StatusEnum {
     ACTIVE
     INACTIVE
     SUSPENDED
@@ -13,10 +13,12 @@ const typeDefs = gql`
   input SearchInput {
     keyword: String
   }
-
-  input TweetInput {
+  input TweetPostInput {
     text: String!
-    userId: ID!
+  }
+  input TweetUpdateInput {
+    id: ID!
+    text: String
   }
 
   type User {
@@ -25,25 +27,26 @@ const typeDefs = gql`
     firstName: String!
     lastName: String
     fullName: String!
-    email: Email
-    phoneNumber: PhoneNumber
+    email: EmailScalar
+    phoneNumber: PhoneNumberScalar
   }
   type Tweet {
     id: ID!
     text: String!
     author: User
-    status: Status!
+    status: StatusEnum!
   }
 
   type Query {
     allUsers: [User!]!
     allTweets: [Tweet!]!
-    searchTweets(keyword: String): [Tweet!]!
+    searchTweets(searchInput: SearchInput): [Tweet!]!
     tweet(id: ID!): Tweet
   }
 
   type Mutation {
-    postTweet(tweetInput: TweetInput!): Tweet!
+    postTweet(tweetPostInput: TweetPostInput!): Boolean!
+    updateTweet(tweetUpdateInput: TweetUpdateInput!): Boolean!
     deleteTweet(id: ID!): Boolean!
   }
 `;

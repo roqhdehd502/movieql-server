@@ -1,6 +1,7 @@
-export const getUsers = [
+export const usersData = [
   {
     "id": "1",
+    "username": "",
     "firstName": "John",
     "lastName": "Doe",
     "email": "john@example.com",
@@ -8,6 +9,7 @@ export const getUsers = [
   },
   {
     "id": "2",
+    "username": "Doge",
     "firstName": "Elon",
     "lastName": "Musk",
     "email": "elon@example.com",
