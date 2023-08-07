@@ -1,36 +1,10 @@
+import { getUsers } from '../datas/users';
+import { getTweets } from '../datas/tweets';
+
 import { emailRegex, phoneNumberRegex } from "../utils/regex";
 
-let tweets = [
-  {
-    id: "1",
-    text: "Hello",
-    userId: "2",
-    status: "ACTIVE"
-  },
-  {
-    id: "2",
-    text: "Yello",
-    userId: "1",
-    status: "ACTIVE"
-  }
-];
-
-let users = [
-  {
-    id: "1",
-    firstName: "John",
-    lastName: "Doe",
-    email: "john@example.com",
-    phoneNumber: "010-1234-5678"
-  },
-  {
-    id: "2",
-    firstName: "Elon",
-    lastName: "Musk",
-    email: "elon@example.com",
-    phoneNumber: "010-5678-2333"
-  }
-]
+const users = [...getUsers];
+let tweets = [...getTweets];
 
 const resolvers = {
   Query: {

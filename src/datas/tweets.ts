@@ -1,4 +1,4 @@
-[
+export const getTweets = [
   {
     "id": "1",
     "text": "Hello",
@@ -11,5 +11,5 @@
     "userId": "1",
     "status": "ACTIVE"
   }
-]
+];
   

@@ -1,4 +1,4 @@
-[
+export const getUsers = [
   {
     "id": "1",
     "firstName": "John",
@@ -13,4 +13,4 @@
     "email": "elon@example.com",
     "phoneNumber": "010-5678-2333"
   }
-]
+];
