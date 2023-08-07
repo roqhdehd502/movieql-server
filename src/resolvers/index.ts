@@ -1,14 +1,18 @@
+import _ from 'lodash';
+
+import type { Tweet } from '../types/tweet';
+
 import { getUsers } from '../datas/users';
 import { getTweets } from '../datas/tweets';
 
 import { emailRegex, phoneNumberRegex } from "../utils/regex";
 
-type Tweet = {
-  id: string;
-  text: string;
-  userId: string;
-  status: string;
-};
+// type Tweet = {
+//   id: string;
+//   text: string;
+//   userId: string;
+//   status: string;
+// };
 
 const users = [...getUsers];
 let tweets: Tweet[] = [...getTweets];
@@ -22,15 +26,7 @@ const resolvers = {
       const filteredText = tweets.filter(tweet => tweet.text.includes(keyword));
       const filteredUserId = tweets.filter(tweet => tweet.userId.includes(keyword));
       const combinedFiltered: Tweet[] = [...filteredText, ...filteredUserId];
-
-      // TODO: duplicate combinedFiltered
-      // return combinedFiltered.reduce((unique, item) => {
-      //   if (!unique.some(existingItem => existingItem.id === item.id)) {
-      //     unique.push(item);
-      //   }
-      //   return unique;
-      // }, []);
-      return combinedFiltered;
+      return _.uniqBy(combinedFiltered, "id");
     },
     tweet(_: any, { id }: { id: string }) {
       return tweets.find(tweet => tweet.id === id);

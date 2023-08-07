@@ -6,7 +6,6 @@ dist/
 .DS_Store
 
 # Editor-specific
-.vscode/
 .idea/
 
 # Environment
