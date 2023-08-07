@@ -4,6 +4,15 @@ enum Status {
   SUSPENDED
 }
 
+input SearchInput {
+  keyword: String
+}
+
+input TweetInput {
+  text: String!
+  userId: ID!
+}
+
 type Tweet {
   id: ID!
   text: String!
@@ -13,10 +22,11 @@ type Tweet {
 
 type Query {
   allTweets: [Tweet!]!
+  searchTweets(searchInput: SearchInput): [Tweet!]!
   tweet(id: ID!): Tweet
 }
 
 type Mutation {
-  postTweet(text: String!, userId: ID!): Tweet!
+  postTweet(textInput: TweetInput!): Tweet!
   deleteTweet(id: ID!): Boolean!
 }

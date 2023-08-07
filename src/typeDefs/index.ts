@@ -10,6 +10,15 @@ const typeDefs = gql`
     SUSPENDED
   }
 
+  input SearchInput {
+    keyword: String
+  }
+
+  input TweetInput {
+    text: String!
+    userId: ID!
+  }
+
   type User {
     id: ID!
     username: String!
@@ -29,11 +38,12 @@ const typeDefs = gql`
   type Query {
     allUsers: [User!]!
     allTweets: [Tweet!]!
+    searchTweets(keyword: String): [Tweet!]!
     tweet(id: ID!): Tweet
   }
 
   type Mutation {
-    postTweet(text: String!, userId: ID!): Tweet!
+    postTweet(tweetInput: TweetInput!): Tweet!
     deleteTweet(id: ID!): Boolean!
   }
 `;

@@ -3,13 +3,34 @@ import { getTweets } from '../datas/tweets';
 
 import { emailRegex, phoneNumberRegex } from "../utils/regex";
 
+type Tweet = {
+  id: string;
+  text: string;
+  userId: string;
+  status: string;
+};
+
 const users = [...getUsers];
-let tweets = [...getTweets];
+let tweets: Tweet[] = [...getTweets];
 
 const resolvers = {
   Query: {
     allTweets() {
       return tweets;
+    },
+    searchTweets(_: any, { keyword }: { keyword: string }) {
+      const filteredText = tweets.filter(tweet => tweet.text.includes(keyword));
+      const filteredUserId = tweets.filter(tweet => tweet.userId.includes(keyword));
+      const combinedFiltered: Tweet[] = [...filteredText, ...filteredUserId];
+
+      // TODO: duplicate combinedFiltered
+      // return combinedFiltered.reduce((unique, item) => {
+      //   if (!unique.some(existingItem => existingItem.id === item.id)) {
+      //     unique.push(item);
+      //   }
+      //   return unique;
+      // }, []);
+      return combinedFiltered;
     },
     tweet(_: any, { id }: { id: string }) {
       return tweets.find(tweet => tweet.id === id);
