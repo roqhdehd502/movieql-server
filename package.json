@@ -1,14 +1,14 @@
 {
   "name": "movieql-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "movieql-server",
   "main": "index.js",
   "scripts": {
     "start": "node dist/index.js",
     "dev": "nodemon --watch 'src/**/*.ts' --exec ts-node src/index.ts"
   },
   "keywords": [],
-  "author": "",
+  "author": "MinwooNa",
   "license": "ISC",
   "devDependencies": {
     "@types/express": "^4.17.17",
@@ -21,6 +21,7 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "lodash": "^4.17.21"
   }
 }
