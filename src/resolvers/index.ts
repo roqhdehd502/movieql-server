@@ -1,14 +1,17 @@
 import loadash from 'lodash';
 
-import type { User } from '../types/user';
-import type { Tweet } from '../types/tweet';
-
-import { StatusEnum } from '../enums/tweet';
-
-import { SearchInput, TweetPostInput, TweetUpdateInput } from '../inputs/tweet';
-
 import { usersData } from '../datas/users';
 import { tweetsData } from '../datas/tweets';
+
+import { StatusEnum } from './enums/tweet';
+
+import { SearchInput, TweetPostInput, TweetUpdateInput } from './inputs/tweet';
+
+import { IDScalar, StringScalar } from './scalars/common';
+import { EmailScalar, PhoneNumberScalar } from './scalars/user';
+
+import type { Tweet } from './types/tweet';
+import type { User } from './types/user';
 
 import { emailRegex, phoneNumberRegex } from "../utils/regex";
 
@@ -27,7 +30,7 @@ const resolvers = {
       const combinedFiltered: Tweet[] = [...filteredText, ...filteredUserId];
       return loadash.uniqBy(combinedFiltered, "id");
     },
-    tweet(_: any, { id }: { id: string }) {
+    tweet(_: any, { id }: { id: IDScalar }) {
       return tweets.find(tweet => tweet.id === id);
     },
     allUsers() {
@@ -61,7 +64,7 @@ const resolvers = {
         console.log(error);
       }
     },
-    deleteTweet(_: any, { id }: { id: string }) {
+    deleteTweet(_: any, { id }: { id: IDScalar }) {
       const tweet = tweets.find(tweet => tweet.id === id);
       if (!tweet) return false;
       try {
@@ -74,18 +77,18 @@ const resolvers = {
   },
 
   User: {
-    fullName({ firstName, lastName }: { firstName: string, lastName: string }) {
+    fullName({ firstName, lastName }: { firstName: StringScalar, lastName: StringScalar }) {
       return `${firstName}-${lastName}`;
     },
-    email({ email }: { email: string }) {
+    email({ email }: { email: EmailScalar }) {
       return emailRegex.test(email) ? email : "";
     },
-    phoneNumber({ phoneNumber }: { phoneNumber: string }) {
+    phoneNumber({ phoneNumber }: { phoneNumber: PhoneNumberScalar }) {
       return phoneNumberRegex.test(phoneNumber) ? phoneNumber : "";
     },
   },
   Tweet: {
-    author({ userId }: { userId: string }) {
+    author({ userId }: { userId: IDScalar }) {
       return users.find(user => user.id === userId);
     }
   }

@@ -1,4 +1,4 @@
-import { StatusEnum } from "../enums/tweet";
+import { StatusEnum } from "../resolvers/enums/tweet";
 
 export const tweetsData = [
   {
